@@ -1,177 +1,168 @@
-📄 Project Documentation: AI Agent System with Automated Testing & Sandbox Execution
-🧠 1. Project Overview
+AI Agent System with Automated Testing & Sandbox Execution
+📌 Overview
 
 This project implements an AI Agent System that can:
 
-Process user inputs
-Perform computations (math, Python execution)
-Use tools (calculator, search)
-Generate intelligent responses using LLM (Azure OpenAI)
-Automatically test its own outputs
-Run inside a sandboxed environment (Docker)
+Process user inputs intelligently
+Execute tasks using tools (calculator, Python execution, search)
+Use Azure OpenAI (LLM) for reasoning
+Perform automated testing without manual intervention
+Run in a sandboxed environment using Docker
 🎯 Objective
-To build a scalable, testable, and production-ready AI agent system
-with automated validation and sandbox-based execution.
-🏗️ 2. System Architecture
+
+To build a production-ready AI agent system that is:
+
+Scalable
+Testable
+Secure
+Modular
+🏗️ Architecture
 Client (Test Runner / UI)
         ↓
-FastAPI (Communication Layer)
+FastAPI (API Layer)
         ↓
-LangGraph Agent (Core Brain)
+LangGraph Agent (Core)
         ↓
 Planner (Decision Making)
         ↓
-Worker (Execution Layer)
+Worker (Execution)
         ↓
 Tools (Calculator / Search)
         ↓
 Response
         ↓
 Validator (Testing Layer)
-🔗 3. Agent Communication Flow
-Step-by-step
-🟢 1. Client Request
-requests.post("/run-agent", {"input": "calculate 5+5"})
-🟢 2. FastAPI (Communication Layer)
-Receives request
-Forwards input to agent
-graph.invoke(...)
-🟢 3. LangGraph (Agent Core)
+🔗 How the Agent Works
+Client sends request
+Example: "calculate (5*10)+20"
+FastAPI receives request
+Acts as communication layer
+Graph (Agent) executes
+Planner decides what to do
+Worker executes the task
+Tools perform execution
+Calculator / Python / Search
+Response returned to client
+🤖 Agent Design
 
-Controls execution flow:
+This project follows a Tool-Based Agent Architecture:
 
-Planner → Worker → Result
-🟢 4. Planner (Thinking Layer)
-Interprets user input
-Decides next step
-
-Example:
-
-"calculate (5*10)+20" → send to calculator
-🟢 5. Worker (Execution Layer)
-Executes actual task using tools
-calculator → math
-search → query
-🟢 6. Response Returned
-{
-  "response": "70"
-}
-🤖 4. Agent-to-Agent Communication
-
-In this system:
-
-Planner → communicates with Worker
-Planner decides WHAT to do
-Worker performs HOW to do
-
-This is a modular agent interaction design, similar to:
-
-Manager Agent → Executor Agent
-⚙️ 5. Tools Integration
-
-The agent uses tools:
-
-calculator()
-search()
-
-👉 Enables tool-based AI architecture
-
-🧪 6. Automated Testing System
-🔥 Problem
+LLM (Azure OpenAI) → reasoning
+Planner → decision making
+Worker → execution
+Tools → perform tasks
+⚙️ Features
+✅ Tool-based execution (calculator, search)
+✅ Azure OpenAI integration
+✅ LangGraph-based agent orchestration
+✅ FastAPI backend
+✅ Automated testing system
+✅ Docker sandbox environment
+🧪 Automated Testing
+🔥 Why?
 
 Manual testing is slow and unreliable.
 
-✅ Solution: Test Runner
+✅ Solution
+
+A test runner automatically validates outputs:
+
 python tests/test_runner.py
-🔁 How it works
+🔁 Testing Flow
 Test Case → API → Agent → Response → Validator → PASS/FAIL
-📌 Example
+📌 Example Test Case
 {
   "input": "calculate (5*10)+20",
   "expected": "70"
 }
-✅ 7. Validation System
-🟢 Simple Validator (Rule-Based)
-Checks exact match
-Extracts numbers
+✅ Validation System
+🟢 Simple Validator
+Rule-based matching
 Fast and free
-🔴 LLM Validator 
+🔴 LLM Validator
 Uses Azure OpenAI
 Checks semantic correctness
-"AI is intelligence in machines" → still PASS
-⚖️ Trade-off
-Type	Cost	Accuracy
-Simple	Free	Medium
-LLM	Paid	High
-🧠 8. Why Automated Testing is Industry-Level
-✔ Eliminates manual QA
-✔ Ensures reliability
-✔ Enables CI/CD integration
-✔ Supports regression testing
-🐳 9. Sandbox Concept
-🧠 What is a Sandbox?
-An isolated environment to safely run code
-🟢 Demo Sandbox (Your current system)
-Runs locally using Docker
-Used for:
-✔ Testing
-✔ Demonstration
-✔ Development
-🔴 Execution Sandbox 
-
-Used in production:
-
-✔ Isolated containers
-✔ Secure code execution
-✔ No system access
-✔ Scalable (Kubernetes)
-
+🐳 Sandbox Concept
+🟢 Demo Sandbox (Current)
+Built using Docker
+Used for development & testing
+🔴 Execution Sandbox (Industry)
+Fully isolated environment
+Secure code execution
+Used in production systems
 🆚 Demo vs Execution Sandbox
 Feature	Demo Sandbox	Execution Sandbox
-Purpose	Demo/testing	Production
+Purpose	Testing	Production
 Security	Medium	High
 Scale	Local	Cloud
 Tools	Docker	Kubernetes
-🚀 10. Why Docker is Used
-✔ Environment consistency
-✔ Easy deployment
-✔ Isolation
-✔ Reproducibility
-🤖 11. AI Agent Design Pattern
+🚀 Why Docker?
+Environment consistency
+Isolation
+Easy deployment
+Reproducibility
+🔐 Why Execution Sandbox Matters
+Prevents malicious code execution
+Protects system resources
+Enables safe AI agent operations
+📂 Project Structure
+app/
+ ├── agents/
+ │    ├── planner.py
+ │    ├── worker.py
+ ├── tools/
+ │    ├── tools.py
+ ├── graph.py
+ ├── api/
+ │    ├── main.py
 
-This system follows:
+tests/
+ ├── test_runner.py
+ ├── test_cases.py
+ ├── validator.py
+⚡ Installation & Setup
 
-Tool-based Agent Architecture
-Components:
-LLM → Reasoning
-Tools → Execution
-Router → Decision
-Validator → Evaluation
-🔥 12. Industry-Level Features Achieved
-✔ Agent orchestration (LangGraph)
-✔ Tool-based execution
-✔ Azure OpenAI integration
-✔ Automated testing pipeline
-✔ Sandbox environment (Docker)
-✔ API-based architecture (FastAPI)
-✔ Modular design
-🧠 13. Key Learning
-LLM is NOT execution engine
-LLM is decision maker
-Tools perform execution
-🚀 14. Future Improvements
-✔ Multi-step reasoning agent
-✔ Memory (conversation history)
-✔ Dynamic tool selection (LLM-based)
-✔ UI integration (chat interface)
-✔ CI/CD pipeline
-✔ Kubernetes deployment
-🏁 15. Conclusion
+# Clone repo
+git clone <your-repo>
 
-This project demonstrates a complete AI agent system with:
+# Install dependencies
+pip install -r requirements.txt
+
+# Run server
+uvicorn app.api.main:app --reload
+
+# Run tests
+python tests/test_runner.py
+
+🔑 Environment Variables
+AZURE_OPENAI_API_KEY=your_key
+AZURE_OPENAI_ENDPOINT=your_endpoint
+AZURE_OPENAI_DEPLOYMENT=your_deployment
+🧠 Key Learnings
+LLM is not an execution engine
+Tools perform actual execution
+Agents require structured orchestration
+Automated testing is essential for reliability
+🔥 Industry Relevance
+
+This system reflects real-world practices:
+
+Agent orchestration (LangGraph)
+Tool-based AI systems
+Automated validation pipelines
+Sandbox-based execution
+API-driven architecture
+🚀 Future Improvements
+Multi-step reasoning agent
+Memory (conversation history)
+Dynamic tool selection using LLM
+UI (chat interface)
+Kubernetes deployment
+🏁 Conclusion
+
+This project demonstrates a complete AI agent pipeline with:
 
 Intelligent decision-making
-Tool-based execution
-Automated validation
-Secure sandbox environment
-It reflects real-world industry practices used in modern AI systems.
+Safe execution
+Automated testing
+Scalable architecture
